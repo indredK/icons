@@ -1,0 +1,13 @@
+alert-twotone
+ant-design-outlined
+check-circle-twotone
+clock-circle-outlined
+dashboard-outlined
+heart-twotone
+home-outlined
+loading-outlined
+setting-filled
+smile-outlined
+smile-twotone
+sync-outlined
+twitter-outlined
