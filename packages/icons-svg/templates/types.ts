@@ -10,9 +10,9 @@ export interface IconDefinition {
   name: string; // kebab-case-style
   theme: ThemeType;
   icon:
-    | ((primaryColor: string, secondaryColor: string) => AbstractNode)
-    | AbstractNode;
+  | ((primaryColor: string, secondaryColor: string) => AbstractNode)
+  | AbstractNode;
 }
 
 export type ThemeType = 'filled' | 'outlined' | 'twotone';
-export type ThemeTypeUpperCase = 'Filled' | 'Outlined' | 'TwoTone';
+export type ThemeTypeUpperCase = 'Filled' | 'Outlined' | 'TwoTone' | 'Sys';

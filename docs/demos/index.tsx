@@ -1,16 +1,5 @@
-import React from 'react';
+import * as React from 'react';
+import AllIconDemo from './_showIcons'
 
 
-
-const AllIconDemo = () => {
-
-
-  return (
-    <div style={{ color: '#555' }}>
-      所有
-
-    </div>
-  );
-}
-
-export default AllIconDemo;
+export default () => <AllIconDemo type={"all"} />

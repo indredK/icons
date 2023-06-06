@@ -1,15 +1,7 @@
-import  React from 'react';
+import * as React from 'react';
+import AllIconDemo from './_showIcons'
+import { Device } from '@ursalink-cloud/core-sdk';
 
 
+export default () => <AllIconDemo type={"device"} />
 
-const AllIconDemo = () => {
-
-
-  return (
-    <div style={{ color: '#555' }}>
-    设备
-    </div>
-  );
-}
-
-export default AllIconDemo;

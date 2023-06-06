@@ -1,0 +1,65 @@
+.Card svg {
+    border: 2px dashed #d0d0d0;
+}
+
+
+.Card {
+    display: flex;
+    flex-direction: column;
+    /* 竖向排列 */
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.Center {
+    /* 超出部分隐藏 */
+    overflow: hidden;
+    /* 禁止换行 */
+    white-space: nowrap;
+    /* 超出部分用省略号表示 */
+    text-overflow: ellipsis;
+}
+
+.Show {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 2px solid transparent;
+    /* 边框初始状态：透明边框 */
+    border-radius: 10px;
+    /* 圆角 */
+}
+
+.Show::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    /* 将伪元素的位置调整到边框上面 */
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 2px solid transparent;
+    /* 初始状态：透明边框 */
+    border-radius: 12px;
+    /* 比原始圆角略大 */
+    animation: rainbow-border 2s infinite linear;
+    /* 应用边框动画 */
+}
+
+@keyframes rainbow-border {
+    0% {
+        border-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    }
+
+    100% {
+        border-image: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+    }
+}
+
+
+
+.project{
+    user-select: none;
+}

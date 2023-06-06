@@ -7,7 +7,7 @@
     "moduleResolution": "node",
     "jsx": "react"
   },
-  "include": ["./src", "./typings/"],
+  "include": ["./src", "./typings/", "../../xzUtils"],
   "typings": "./typings/index.d.ts",
   "exclude": [
     "node_modules",

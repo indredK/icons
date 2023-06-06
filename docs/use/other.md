@@ -1,10 +1,10 @@
 ---
-nav: 使用
-group: 基本使用
-order: 3
+group: 进阶
+order: 0
 ---
 
-# 其他组件
+# 其他注意事项
 
-这里显示其他组件
+对于有些可以复用，需要组合的svg，可以使用css+svg的形式实现，例如：
+
 <code src="../demos/other.tsx"></code>

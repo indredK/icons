@@ -1,16 +1,6 @@
-import  React from 'react';
+import * as React from 'react';
+import AllIconDemo from './_showIcons'
+import { Device } from '@ursalink-cloud/core-sdk';
 
 
-
-const AllIconDemo = () => {
-
-
-  return (
-    <div style={{ color: '#555' }}>
-  通道
-
-    </div>
-  );
-}
-
-export default AllIconDemo;
+export default () => <AllIconDemo type={"channel"} />

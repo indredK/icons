@@ -1,4 +1,5 @@
-import * as allIconDefs from '@indredk/icons-svg';
+// import * as allIconDefs from '@indredk/icons-svg';
+import * as allIconDefs from '../../icons-svg/lib';
 import { IconDefinition } from '@indredk/icons-svg/es/types';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -40,7 +41,7 @@ async function generateIcons() {
 // DON NOT EDIT IT MANUALLY
 
 import * as React from 'react'
-import <%= svgIdentifier %>Svg from '@indredk/icons-svg/lib/asn/<%= svgIdentifier %>';
+import <%= svgIdentifier %>Svg from '../../../icons-svg/lib/asn/<%= svgIdentifier %>';
 import AntdIcon, { AntdIconProps } from '../components/AntdIcon';
 
 const <%= svgIdentifier %> = (

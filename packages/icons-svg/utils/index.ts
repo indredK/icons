@@ -18,3 +18,14 @@ export const getIdentifier: GetIdentifierType = pipe(
   camelCase,
   upperFirst
 );
+export const getIdentifierXzSvg: GetIdentifierType = pipe(
+  ({ name, themeSuffix }: IdentifierMeta) =>
+    name + (themeSuffix ? `-${themeSuffix}` : ''),
+  (str: string) => str.replace(/[-_]/g, ""),
+);
+export const getIdentifierXzSvgSys: GetIdentifierType = pipe(
+  ({ name, themeSuffix }: IdentifierMeta) =>
+    (themeSuffix ? `-${themeSuffix}` : '') + name,
+  camelCase,
+  upperFirst
+);

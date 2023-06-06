@@ -7,7 +7,7 @@ const AllIconDemo = () => {
 
   return (
     <div style={{ color: '#555' }}>
-    其他
+ 组合
 
     </div>
   );

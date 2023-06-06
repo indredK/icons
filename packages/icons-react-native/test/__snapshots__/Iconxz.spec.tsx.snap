@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconFill props exists 1`] = `
+<
+  style={
+    [
+      {
+        "color": "black",
+        "fontFamily": "antxz",
+        "fontSize": 24,
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+      },
+      undefined,
+    ]
+  }
+>
+  ?
+</>
+`;
+
+exports[`IconFill should create fillGlyphMap 1`] = `
+{
+  "github": 59905,
+  "moon-regular": 59906,
+  "sun-regular": 59907,
+}
+`;

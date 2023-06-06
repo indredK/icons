@@ -8,4 +8,4 @@ order: 1
 # 通道组件
 
 这里显示通道组件
-<code src="../demos/system.tsx"></code>
+<code src="../demos/channel.tsx"></code>
