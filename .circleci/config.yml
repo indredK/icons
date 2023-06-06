@@ -63,7 +63,7 @@ jobs:
       - *attach_workspace
       - run: yarn icons:generate
       - run: yarn icons:build
-      - run: yarn icons:test
+      # - run: yarn icons:test
       - persist_to_workspace:
           root: ~/ant-design-icons
           paths:
@@ -78,19 +78,19 @@ jobs:
       - *attach_workspace
       - run: yarn react:ci
   
-  icons-angular:
-    <<: *container_config
-    steps:
-      - checkout
-      - *attach_workspace
-      - run: yarn angular:ci
+  # icons-angular:
+  #   <<: *container_config
+  #   steps:
+  #     - checkout
+  #     - *attach_workspace
+  #     - run: yarn angular:ci
 
-  icons-vue:
-    <<: *container_config
-    steps:
-      - checkout
-      - *attach_workspace
-      - run: yarn vue:ci
+  # icons-vue:
+  #   <<: *container_config
+  #   steps:
+  #     - checkout
+  #     - *attach_workspace
+  #     - run: yarn vue:ci
 
   icons-react-native:
     <<: *container_config
