@@ -23,14 +23,14 @@ references:
           requires:
           - setup
           - icons-svg
-      - icons-angular:
-          requires:
-          - setup
-          - icons-svg
-      - icons-vue:
-          requires:
-          - setup
-          - icons-svg
+      # - icons-angular:
+      #     requires:
+      #     - setup
+      #     - icons-svg
+      # - icons-vue:
+      #     requires:
+      #     - setup
+      #     - icons-svg
       - icons-react-native:
           requires:
           - setup
