@@ -50,11 +50,6 @@ jobs:
       - run: node -v
       - run: yarn -v
       - run: yarn
-      # - run: yarn bootstrap
-      - run: yarn install
-      # - run: yarn install-svg
-      # - run: yarn install-react
-      # - run: yarn install-react-native
       - run: yarn importSvg
       - run:
           command: |
