@@ -1,6 +1,6 @@
 {
   "name": "@indredk/icons-react-native",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "main": "./lib/index.js",
   "module": "./es/index.js",
   "sideEffects": false,
