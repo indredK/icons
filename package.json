@@ -4,6 +4,7 @@
   "description": "星纵图标库demo",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "private": true,
   "workspaces": {
     "packages": [
       "packages/*"
