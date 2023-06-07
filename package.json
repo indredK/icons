@@ -7,6 +7,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "bootstrap": "lerna bootstrap 这个命令将来会被弃用的",
+    "install": "lerna run install",
     "install-svg": "lerna run install  @indredk/icons-svg",
     "install-react": "lerna run install  @indredk/icons",
     "install-react-native": "lerna run install   @indredk/icons-react-native",
