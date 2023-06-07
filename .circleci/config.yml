@@ -114,11 +114,10 @@ jobs:
       - run:
           name: Publish to NPM
           command: |
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
             yarn icons-svg:publish
             yarn icons-react:publish
             yarn icons-react-native:publish
-
-
 
 workflows:
   version: 2.1
