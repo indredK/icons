@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-import { getString, getSvgList,  } from "./utils";
+import { getString, getSvgList, } from "./utils";
 
 
 export interface CustomIconOptions {
@@ -46,9 +46,23 @@ async function createScriptUrlElements(currentScriptUrl: string, type: string): 
 }
 
 
+/** 按配置修改版本号 */
+const changeNpmVersion = (obj: { [key: string]: string }): void => {
+  Object.keys(obj).forEach(key => {
+    const packageJsonPath = path.resolve(__dirname, '..', 'packages', key, 'package.json');
+    const json = require(packageJsonPath);
+    json.version = obj[key];
+    fs.writeFileSync(packageJsonPath, JSON.stringify(json, null, 2));
+  });
+}
+
+
+
 /** 对阿里的url进行解析，生成对应命名的图片文件，输出到指定文件夹里 */
-export default function create(options: any) {
-  const { scriptUrl, sysUrl } = options;
-  createScriptUrlElements(scriptUrl, "");
-  createScriptUrlElements(sysUrl, 'sys');
+export default async function create(options: any) {
+  const { scriptUrl, sysUrl, "npm-version": npmVersion } = options;
+  await createScriptUrlElements(scriptUrl, "");
+  await createScriptUrlElements(sysUrl, 'sys');
+  // 替换版本号
+  changeNpmVersion(npmVersion)
 }

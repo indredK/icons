@@ -6,9 +6,14 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap 这个命令将来会被弃用的",
+    "install-svg": "lerna run install  @indredk/icons-svg",
+    "install-react": "lerna run install  @indredk/icons",
+    "install-react-native": "lerna run install   @indredk/icons-react-native",
+    "publish:ci": "lerna version --no-private ",
+    "publish:ci1": "lerna  publish ",
+    
     "clean": "lerna clean",
-    "bootstrap:china": "lerna bootstrap --registry=https://registry.npmmirror.com",
     "rn:generate": "lerna run --scope @indredk/icons-react-native generate",
     "icons:generate": "lerna run --scope @indredk/icons-svg generate",
     "icons:build": "lerna run --scope @indredk/icons-svg build",
@@ -29,7 +34,7 @@
     "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "prepublishOnly": "father doctor && npm run build",
-    "tt": "tsx tt.ts"
+    "importSvg": "tsx importSvg.ts"
   },
   "authors": [
     "Kindred"
@@ -70,28 +75,28 @@
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
-    "@types/react": "^18.2.7",
-    "@types/react-dom": "^18.0.0",
     "@types/lodash.camelcase": "^4.3.6",
     "@types/lodash.template": "^4.4.6",
     "@types/lodash.upperfirst": "^4.3.6",
+    "@types/react": "^18.2.7",
+    "@types/react-dom": "^18.0.0",
     "@umijs/lint": "^4.0.0",
     "antd": "^5.5.2",
     "dumi": "^2.2.0",
     "eslint": "^8.23.0",
     "father": "^4.1.0",
     "husky": "^8.0.1",
-    "lerna": "^3.4.0",
+    "lerna": "^6.6.2",
     "lint-staged": "^13.0.3",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.template": "^4.5.0",
+    "lodash.upperfirst": "^4.3.1",
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.0.0",
     "prettier-plugin-packagejson": "^2.2.18",
     "react": "^18.3.0-next-fecc288b7-20221025",
     "react-dom": "^18.0.0",
     "styled-components": "^3.3.3",
-    "lodash.camelcase": "^4.3.0",
-    "lodash.template": "^4.5.0",
-    "lodash.upperfirst": "^4.3.1",
     "stylelint": "^14.9.1"
   },
   "dependencies": {

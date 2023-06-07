@@ -35,6 +35,12 @@ references:
           requires:
           - setup
           - icons-svg
+      - publish:
+          requires:
+          - setup
+          - icons-svg
+          - icons-react
+          - icons-react-native
 
 jobs:
   setup:
@@ -44,7 +50,11 @@ jobs:
       - run: node -v
       - run: yarn -v
       - run: yarn
-      - run: yarn bootstrap
+      # - run: yarn bootstrap
+      - run: yarn install-svg
+      - run: yarn install-react
+      - run: yarn install-react-native
+      - run: yarn importSvg
       - run:
           command: |
             set +eo
@@ -99,8 +109,20 @@ jobs:
       - *attach_workspace
       - run: yarn react-native:ci
 
+  
+  publish:
+    <<: *container_config
+    steps:
+      - checkout
+      - run:
+          name: Publish to NPM
+          command: |
+            yarn publish:ci
+
+
+
 workflows:
-  version: 2
+  version: 2.1
   build_test:
     <<: *workflow
   nightly:
