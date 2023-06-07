@@ -5,9 +5,15 @@
   "description": "星纵图标库demo",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/webpack-iconfont-plugin-nodejs",
+      "**/webpack-iconfont-plugin-nodejs/**"
+    ]
+  },
   "scripts": {
     "bootstrap": "lerna bootstrap 这个命令将来会被弃用的",
     "publish:ci": "lerna version  ",
