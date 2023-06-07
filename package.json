@@ -1,7 +1,6 @@
 {
   "name": "indredk",
-  "version": "10.0.1",
-  "private": true,
+  "version": "2.0.3",
   "description": "星纵图标库demo",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,9 +15,9 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap 这个命令将来会被弃用的",
-    "publish:ci": "lerna version  ",
-    "publish:ci1": "lerna  publish ",
-    "clean": "lerna clean",
+    "publish:ci": "lerna publish --no-private --no-git-tag-version --no-push  --yes",
+    "publish:ci1": "lerna version --no-git-tag-version --no-push --yes    ",
+    "clean": "lerna  clean",
     "rn:generate": "lerna run --scope @indredk/icons-react-native generate",
     "icons:generate": "lerna run --scope @indredk/icons-svg generate",
     "icons:build": "lerna run --scope @indredk/icons-svg build",

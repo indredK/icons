@@ -1,10 +1,9 @@
 {
   "name": "@indredk/icons-svg",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "sideEffects": false,
   "description": "Abstract nodes for ant design icons.",
-  "contributors": [
-  ],
+  "contributors": [],
   "homepage": "https://gitee.com/inderK",
   "license": "MIT",
   "main": "lib/index.js",
