@@ -110,10 +110,12 @@ jobs:
     <<: *container_config
     steps:
       - checkout
+      - *attach_workspace
       - run:
           name: Publish to NPM
           command: |
             yarn publish:ci
+            yarn publish:ci1
 
 
 
