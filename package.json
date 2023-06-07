@@ -15,8 +15,9 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap 这个命令将来会被弃用的",
-    "publish:ci": "lerna publish --no-private --no-git-tag-version --no-push  --yes",
-    "publish:ci1": "lerna version --no-git-tag-version --no-push --yes    ",
+    "icons-svg:publish": "cd packages && cd icons-svg && npm  publish ",
+    "icons-react:publish": "cd packages && cd icons-react && npm  publish ",
+    "icons-react-native:publish": "cd packages && cd icons-react-native && npm  publish ",
     "clean": "lerna  clean",
     "rn:generate": "lerna run --scope @indredk/icons-react-native generate",
     "icons:generate": "lerna run --scope @indredk/icons-svg generate",

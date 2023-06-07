@@ -114,8 +114,9 @@ jobs:
       - run:
           name: Publish to NPM
           command: |
-            yarn publish:ci
-            yarn publish:ci1
+            yarn icons-svg:publish
+            yarn icons-react:publish
+            yarn icons-react-native:publish
 
 
 
