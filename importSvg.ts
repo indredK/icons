@@ -8,8 +8,8 @@ Util({
   // 每次更新以后记得把它的版本版本号更新，三个都要更新，否则会导致CI发布失败
   "npm-version": {
     // 对应packages里面的文件夹名字
-    "icons-svg": "1.0.0",
-    "icons-react": "1.0.0",
-    "icons-react-native": "1.0.0",
+    "icons-svg": "1.0.1",
+    "icons-react": "1.0.1",
+    "icons-react-native": "1.0.1",
   }
 });

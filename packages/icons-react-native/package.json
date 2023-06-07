@@ -1,6 +1,6 @@
 {
   "name": "@indredk/icons-react-native",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./lib/index.js",
   "module": "./es/index.js",
   "sideEffects": false,
@@ -20,7 +20,7 @@
     "generate": "node scripts/index.js",
     "pregenerate": "npm run clean",
     "clean": "rimraf -rf fonts iconfont src/*.tsx",
-    "prepublishOnly": " npm run compile",
+    "prepublishOnly": " npm run generate && npm run compile",
     "preclean": "npm run patch-package",
     "patch-package": "patch-package",
     "ci": " npm run generate && npm run compile",
