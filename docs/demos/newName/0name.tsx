@@ -173,8 +173,7 @@ const Demo = () => {
         filterOption={(input, option) =>
           (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
         }
-        options={Ooptions
-        }
+        options={Ooptions}
       />
       <Button onClick={() => {
         setDvalue(undefined)
@@ -266,7 +265,8 @@ const Demo = () => {
               size={'small'}
               type="dashed"
               onClick={() => {
-                navigator.clipboard.writeText(Name)
+                console.log('%c [ navigator ]-270', 'font-size:13px; background:pink; color:#bf2c9f;', navigator)
+                navigator?.clipboard?.writeText(Name)
                 message.success(`${Name}，已复制！`)
               }} style={{ marginLeft: 20 }}>复制</Button>
           </Tooltip >
@@ -335,7 +335,7 @@ const Demo = () => {
   import React from 'react';
   import { XzIcons } from '@ursalink-cloud/core-sdk'
   
-  export default ()=><XzIcons name={'${upperFirst(camelCase(Name))}'}  />
+  export default ()=><XzIcons name={'${Name}'}  />
   
   `}
             </pre>
@@ -373,6 +373,30 @@ const Demo = () => {
     {
       key: '2',
       label: `系统功能类图标`,
+      children: <div>
+        <Divider orientation="left">直接使用命名（推荐）</Divider>
+        <AllIconDemo type={Tag} />
+
+        <pre style={{ backgroundColor: "#f3f3f3" }}>
+          {`
+  import React from 'react';
+  import { XzIcons } from '@ursalink-cloud/core-sdk'
+  
+  export default () => {
+      return <XzIcons
+        model={'${Dvalue}'}
+        channel={ '${Cvalue}' }
+        status={ '${Ovalue}' }
+      />}
+  />
+  
+  `}
+        </pre>
+      </div>,
+    },
+    {
+      key: '3',
+      label: ` 或许可能有定位类图标`,
       children: <div>
         <Divider orientation="left">直接使用命名（推荐）</Divider>
         <AllIconDemo type={Tag} />

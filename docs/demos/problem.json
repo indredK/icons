@@ -1,0 +1,7 @@
+[
+    {
+        "title": "最后npm publish发布出现问题",
+        "description": "可能是token过期，版本号没改，",
+        "content": "更新token，放在流水线官方的变量、更新版本号并且运行脚本再推送代码"
+    }
+]

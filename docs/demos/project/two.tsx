@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Divider, Steps, Tooltip } from 'antd';
 const Tip1 = require("../newName/tip1.png")
-const Tip2 = require("./tip2.png")
+const Tip2 = require("../tip2.png")
 
 const App: React.FC = () => {
 
