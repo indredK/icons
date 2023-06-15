@@ -18,7 +18,7 @@ const App: React.FC = () => {
             </div>
             <div>
                 1、点击左侧的
-                <a href='http://localhost:8000/use/name' target={'_blank'}>命名的生成和检查</a>;
+                <a href='http://localhost:8000/use/name' target={'_blank'}>命名工具</a>;
 
                 开始对
                 <a href={'https://www.iconfont.cn/'} target={"_blank"}>iconfont</a>
@@ -26,7 +26,7 @@ const App: React.FC = () => {
             </div>
             <div>
                 2、使用
-                <a href='http://localhost:8000/use/name' target={'_blank'}>命名的生成和检查</a>
+                <a href='http://localhost:8000/use/name' target={'_blank'}>命名工具</a>
                 后生成的命名，直接复制，然后去iconfont
                 <img width={230} src={Tip1}></img>
 

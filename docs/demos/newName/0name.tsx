@@ -1,37 +1,18 @@
 import React, { useMemo, useState } from 'react';
-import { Device, Metric } from '@ursalink-cloud/core-sdk'
 import { Select, Input, Button, Row, Col, Tabs, Tooltip, Card, message, List, Typography, Divider } from 'antd';
 import type { TabsProps } from 'antd';
-import OneIcon from '../_oneIcons'
 
-import { Em300SldN00CnPir } from '../../../packages/icons-react/src/icons';
+
 import upperFirst from 'lodash.upperfirst';
 import camelCase from 'lodash.camelcase';
 import * as AntdIcons from '../../../packages/icons-react/src/icons';
-import AllIconDemo from '../_showIcons'
-import { InfoCircleTwoTone } from '@ant-design/icons';
+import Ltn from './Ltn'
+import Code from './code'
+import { Ooptions } from '../rules/constant';
+import { useSdk } from '../rules/hook';
 const Tip1 = require("./tip1.png")
-const { Meta } = Card;
 
-/** 只出现在 设备型号 - Ltn - 这个参数 ，表示设备的定位状态 */
-const LtnList = [
-  {
-    value: 'inactive',
-    label: '未激活',
-  },
-  {
-    value: 'online',
-    label: '在线',
-  },
-  {
-    value: 'alarm',
-    label: '警告',
-  },
-  {
-    value: 'offline',
-    label: '离线',
-  },
-]
+
 
 
 
@@ -39,83 +20,43 @@ const Demo = () => {
   const [Dvalue, setDvalue] = useState<string | undefined>(undefined)
   const [Cvalue, setCvalue] = useState<string | undefined>(undefined)
   const [Ovalue, setOvalue] = useState<string | undefined>(undefined)
-
+  const [MODEL, MetricList] = useSdk()
 
   const allIcons = useMemo(() => { return Object.keys(AntdIcons) }, [])
 
-  console.log('%c [ AntdIcons ]-8', 'font-size:13px; background:pink; color:#bf2c9f;', allIcons)
 
 
-  const DonChange = (value: string) => setDvalue(value);
+  const DonChange = (value: string) => {
+    setDvalue(value)
+    setOvalue(undefined)
+
+  };
   const ConChange = (value: string) => {
-    if (value == "Ltn" && !LtnList.map(i => i.value).includes(Ovalue || "")) {
-      setOvalue(undefined)
-    } else if (value !== "Ltn" && LtnList.map(i => i.value).includes(Ovalue || "")) {
-      setOvalue(undefined)
-    }
     setCvalue(value)
+    setOvalue(undefined)
   };
   const OonChange = (value: string) => setOvalue(value);
 
 
-  const Doptions = useMemo(() => {
-    return [...new Set(Object.values(Device.MODEL))].map((item: string) => {
-      return {
-        value: item,
-        label: item,
-      }
-    })
-  }, [])
+  const [Doptions, Coptions] = useMemo(() => {
 
-  const Coptions = useMemo(() => {
     return [
-      {
-        value: 'Ltn',
-        label: '地图定位',
-      },
-      ...Object.values(Metric.SENSOR_CHANNEL_TYPE).map((item: string) => {
+      MODEL.map((item: string) => {
+        return {
+          value: item,
+          label: item,
+        }
+      }),
+      MetricList.map((item: string) => {
         return {
           value: item,
           label: item,
         }
       })
     ]
-  }, [])
+  }, [MODEL])
 
 
-  const Ooptions = useMemo(() => {
-
-    if (Cvalue === "Ltn") {
-      return LtnList
-    }
-    return [
-      {
-        value: 'monochrome',
-        label: '自定义图片的通道',
-      },
-      {
-        value: '0',
-        label: '级别0',
-      },
-      {
-        value: '1',
-        label: '级别1',
-      },
-      {
-        value: '2',
-        label: '级别2',
-      },
-      {
-        value: '3',
-        label: '级别3',
-      },
-      {
-        value: '4',
-        label: '级别4',
-      },
-    ]
-
-  }, [Cvalue])
 
   const CountFun = (str: string) => {
     return allIcons.reduce((accumulator, currentValue) => {
@@ -182,7 +123,7 @@ const Demo = () => {
 
       }} style={{ marginLeft: 20 }}>置空</Button>
     </div>
-  }, [Dvalue, Cvalue, Ovalue, setDvalue, setCvalue, setOvalue])
+  }, [Dvalue, Cvalue, Ovalue, MODEL, setDvalue, setCvalue, setOvalue])
 
 
 
@@ -291,7 +232,7 @@ const Demo = () => {
       </div>,
       `说明：${Note}`,
     ];
-  }, [Dvalue, Cvalue, Ovalue, setDvalue, setCvalue, setOvalue])
+  }, [Dvalue, Cvalue, Ovalue, MODEL, setDvalue, setCvalue, setOvalue])
 
   const items: TabsProps['items'] = [
 
@@ -302,7 +243,7 @@ const Demo = () => {
         <Row>
           <Col span={20}>
             <List
-              header={<div>设备和通道类的命名（系统类和其他自定义一个单词就可以了）</div>}
+              header={<div>设备和通道类的命名（设备类只需要单选设备名）</div>}
               bordered
               dataSource={data}
               renderItem={(item) => <List.Item>{item}</List.Item>}
@@ -314,7 +255,7 @@ const Demo = () => {
             gridTemplateRows: "5fr 5fr"
           }} span={4}>
             <div style={{ margin: "auto", }}>
-              <OneIcon iconName={Tag} />
+              {/* <OneIcon iconName={Tag} /> */}
             </div>
             <div style={{ width: "150px", margin: "auto" }}>
               项目里面已经有了的，按筛选条件确定的图标
@@ -323,101 +264,111 @@ const Demo = () => {
 
           <Divider orientation="left">相关图标</Divider>
 
-          <AllIconDemo type={Tag} />
-
-
-
+          {/* {!!Tag && <AllIconDemo type={Tag} />} */}
 
           <Col span={24}>
             <Divider orientation="left">代码使用：</Divider>
-            <pre style={{ backgroundColor: "#f3f3f3" }}>
-              {`
-  import React from 'react';
-  import { XzIcons } from '@ursalink-cloud/core-sdk'
-  
-  export default ()=><XzIcons name={'${Name}'}  />
-  
-  `}
-            </pre>
+
+            <Code
+              webCode={`
+import React from 'react';
+import { XzIcons } from '@ursalink-cloud/core-sdk'
+
+export default ()=><XzIcons name={'${Name}'}  />
+           `}
+              appCode={`
+import React from 'react';
+import { XzIcons } from '@ursalink-cloud/core-sdk'
+
+export default ()=><XzIcons name={'${Name}'}  />
+           `}
+            />
+
             <Divider orientation="left">或者使用变量代替：</Divider>
-            <pre style={{ backgroundColor: "#f3f3f3" }}>
-              {`
-  import React from 'react';
-  import { XzIcons } from '@ursalink-cloud/core-sdk'
-  
-  export default () => {
-      return <XzIcons
-        model={'${Dvalue}'}
-        channel={ '${Cvalue}' }
-        status={ '${Ovalue}' }
-      />}
+            <Code
+              webCode={`
+import React from 'react';
+import { XzIcons } from '@ursalink-cloud/core-sdk'
+
+export default () => {
+  return <XzIcons
+    model={'${Dvalue}'}
+    channel={ '${Cvalue}' }
+    status={ '${Ovalue}' }
   />
-  
-  `}
-            </pre>
+}`}
+              appCode={`
+import React from 'react';
+import { XzIcons } from '@ursalink-cloud/core-sdk'
+
+export default () => {
+  return <XzIcons
+    model={'${Dvalue}'}
+    channel={ '${Cvalue}' }
+    status={ '${Ovalue}' }
+  />
+}`}
+            />
+
             <Divider orientation="left">或者直接使用命名（不推荐）</Divider>
-            <pre style={{ backgroundColor: "#f3f3f3" }}>
-              {`
-  import React from 'react';
-  import { ${Tag} } from '@ursalink-cloud/core-sdk'
-  
-  export default () => {
-      return <${Tag} />}
-  />
-  
-  `}
-            </pre>
+            <Code
+              webCode={`
+import React from 'react';
+import { ${Tag} } from '@ursalink-cloud/core-sdk'
+
+export default () => {
+    return <${Tag} />
+  }
+              `}
+              appCode={`
+import React from 'react';
+import { ${Tag} } from '@ursalink-cloud/core-sdk'
+
+export default () => {
+    return <${Tag} />
+                }
+              `}
+            />
           </Col>
         </Row>,
     },
-    {
-      key: '2',
-      label: `系统功能类图标`,
-      children: <div>
-        <Divider orientation="left">直接使用命名（推荐）</Divider>
-        <AllIconDemo type={Tag} />
-
-        <pre style={{ backgroundColor: "#f3f3f3" }}>
-          {`
-  import React from 'react';
-  import { XzIcons } from '@ursalink-cloud/core-sdk'
-  
-  export default () => {
-      return <XzIcons
-        model={'${Dvalue}'}
-        channel={ '${Cvalue}' }
-        status={ '${Ovalue}' }
-      />}
-  />
-  
-  `}
-        </pre>
-      </div>,
-    },
+    // {
+    //   key: '2',
+    //   label: ` 定位类图标`,
+    //   children: <Ltn />,
+    // },
     {
       key: '3',
-      label: ` 或许可能有定位类图标`,
+      label: `系统功能类图标`,
       children: <div>
-        <Divider orientation="left">直接使用命名（推荐）</Divider>
-        <AllIconDemo type={Tag} />
+        <div>
 
-        <pre style={{ backgroundColor: "#f3f3f3" }}>
-          {`
-  import React from 'react';
-  import { XzIcons } from '@ursalink-cloud/core-sdk'
-  
-  export default () => {
-      return <XzIcons
-        model={'${Dvalue}'}
-        channel={ '${Cvalue}' }
-        status={ '${Ovalue}' }
-      />}
-  />
-  
-  `}
-        </pre>
+          默认图片，比如设备类的定位图标等，也写在这里
+        </div>
+        <div>
+          一些特殊图标也会出现在这里，比如蓝牙，蓝牙信号，信号，信号幅度等
+          一般以等级为命名，即：bluetooth ,bluetooth-0,bluetooth-1这种
+        </div>
+        <Divider orientation="left">web和app都直接使用命名（推荐）</Divider>
+        <Code
+          webCode={`
+import React from 'react';
+import { XzIcons } from '@ursalink-cloud/core-sdk'
+
+export default ()=><XzIcons name={'bluetooth-0'}  />
+              
+              `}
+          appCode={`
+import React from 'react';
+import { XzIcons } from '@ursalink-cloud/core-sdk'
+
+export default ()=><XzIcons name={'bluetooth-0'}  />
+              
+              `}
+        />
       </div>,
     },
+
   ];
   return (<Tabs defaultActiveKey="1" items={items} />);
 }

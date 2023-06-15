@@ -2,7 +2,9 @@
     border: 2px dashed #d0d0d0;
 }
 
-
+.ant-card-body{
+    padding: 5% !important;
+}
 .Card {
     display: flex;
     flex-direction: column;
@@ -20,6 +22,7 @@
     white-space: nowrap;
     /* 超出部分用省略号表示 */
     text-overflow: ellipsis;
+    text-align: center;
 }
 
 .Show {

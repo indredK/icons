@@ -40,7 +40,8 @@
     "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "prepublishOnly": "father doctor && npm run build",
-    "importSvg": "tsx importSvg.ts"
+    "importSvg": "tsx importSvg.ts",
+    "push": "sh ./linux/sh_push.sh"
   },
   "authors": [
     "Kindred"
@@ -81,6 +82,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
+    "@types/lodash": "^4.14.195",
     "@types/lodash.camelcase": "^4.3.6",
     "@types/lodash.template": "^4.4.6",
     "@types/lodash.upperfirst": "^4.3.6",
@@ -101,12 +103,16 @@
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.0.0",
     "prettier-plugin-packagejson": "^2.2.18",
-    "react": "^18.3.0-next-fecc288b7-20221025",
+    "react": "^18.2",
     "react-dom": "^18.0.0",
     "styled-components": "^3.3.3",
     "stylelint": "^14.9.1"
   },
   "dependencies": {
+    "immer": "^10.0.2",
+    "localforage": "^1.10.0",
+    "lodash": "^4.17.21",
+    "react-syntax-highlighter": "^15.5.0",
     "ts-node": "^10.9.1",
     "tsx": "^3.12.7",
     "typescript": "^5.2.0-dev.20230530"

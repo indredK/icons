@@ -14,7 +14,7 @@ export default () => {
     useEffect(() => {
 
         const init = async () => {
-            const data = await localforage.getItem(`svgList-${templeName.channel}-url`)
+            const data = await localforage.getItem(`svgList-${templeName.location}-url`)
             console.log('%c [ data ]-20', 'font-size:13px; background:pink; color:#bf2c9f;', data)
             setdata(data)
         }

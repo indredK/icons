@@ -2,6 +2,18 @@
 
 const http = require('http');
 
+/** web端的获取方法 */
+export const getString_web = async (param: string): Promise<string> => {
+  let url = new URL(param.includes("http") ? param : `https:${param}`);
+
+  const response = await fetch(url.href);
+  if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return await response.text();
+}
+
 /** 通过阿里的url，获取所有svg字符串 */
 export const getString = async (param: string): Promise<string> => {
   let url = new URL(param.includes("http") ? param : `https:${param}`)

@@ -1,9 +1,9 @@
 ---
-group: 进阶
+group: 工具
 order: 1
 ---
 
-# 命名的生成和检查
+# 命名工具
 
 
 <code src="../demos/newName/0name.tsx"></code>
