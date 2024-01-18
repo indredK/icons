@@ -38,3 +38,5 @@ build/
 !.fatherrc.js
 !jest.config.js
 .umi
+
+src/icons

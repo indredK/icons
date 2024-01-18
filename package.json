@@ -1,10 +1,14 @@
 {
   "name": "indredk",
   "version": "2.0.3",
+  "private": true,
   "description": "星纵图标库demo",
+  "license": "MIT",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "private": true,
+  "files": [
+    "dist"
+  ],
   "workspaces": {
     "packages": [
       "packages/*"
@@ -15,41 +19,35 @@
     ]
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap 这个命令将来会被弃用的",
-    "icons-svg:publish": "cd packages && cd icons-svg && npm  publish ",
-    "icons-react:publish": "cd packages && cd icons-react && npm  publish ",
-    "icons-react-native:publish": "cd packages && cd icons-react-native && npm  publish ",
-    "clean": "lerna  clean",
-    "rn:generate": "lerna run --scope @indredk/icons-react-native generate",
-    "icons:generate": "lerna run --scope @indredk/icons-svg generate",
-    "icons:build": "lerna run --scope @indredk/icons-svg build",
-    "icons:test": "lerna run --scope @indredk/icons-svg test",
-    "react:ci": "lerna run --scope @indredk/icons ci",
+    "*": "首先更改importSvg文件里面的url和版本号，然后一键运行",
     "angular:ci": "lerna run --scope @indredk/icons-angular-workspace ci",
-    "vue:ci": "lerna run --scope @indredk/icons-vue ci",
-    "react-native:ci": "lerna run --scope @indredk/icons-react-native ci",
-    "lint-ant": "lerna run lint",
-    "start": "npm run dev",
-    "dev": "dumi dev",
+    "bootstrap": "lerna bootstrap 这个命令将来会被弃用的",
     "build": "father build",
     "build:watch": "father dev",
+    "clean": "lerna  clean",
+    "dev": "dumi dev",
     "docs:build": "dumi build",
-    "prepare": "husky install && dumi setup",
     "doctor": "father doctor",
+    "icons-react-native:publish": "cd packages && cd icons-react-native && npm  publish ",
+    "icons-react:publish": "cd packages && cd icons-react && npm  publish ",
+    "icons-svg:publish": "cd packages && cd icons-svg && npm  publish ",
+    "icons:build": "lerna run --scope @indredk/icons-svg build",
+    "icons:generate": "lerna run --scope @indredk/icons-svg generate",
+    "icons:test": "lerna run --scope @indredk/icons-svg test",
+    "importSvg": "tsx importSvg.ts",
     "lint": "npm run lint:es && npm run lint:css",
+    "lint-ant": "lerna run lint",
     "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+    "prepare": "husky install && dumi setup",
     "prepublishOnly": "father doctor && npm run build",
-    "importSvg": "tsx importSvg.ts",
-    "push": "sh ./linux/sh_push.sh"
+    "push": "sh ./linux/sh_push.sh",
+    "react-native:ci": "lerna run --scope @indredk/icons-react-native ci",
+    "react:ci": "lerna run --scope @indredk/icons ci",
+    "rn:generate": "lerna run --scope @indredk/icons-react-native generate",
+    "start": "npm run dev",
+    "vue:ci": "lerna run --scope @indredk/icons-vue ci"
   },
-  "authors": [
-    "Kindred"
-  ],
-  "license": "MIT",
-  "files": [
-    "dist"
-  ],
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
@@ -72,12 +70,14 @@
       "prettier --parser=typescript --write"
     ]
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "peerDependencies": {
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
+  "dependencies": {
+    "immer": "^10.0.2",
+    "localforage": "^1.10.0",
+    "lodash": "^4.17.21",
+    "react-syntax-highlighter": "^15.5.0",
+    "ts-node": "^10.9.1",
+    "tsx": "^3.12.7",
+    "typescript": "^5.2.0-dev.20230530"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
@@ -89,7 +89,7 @@
     "@types/react": "^18.2.7",
     "@types/react-dom": "^18.0.0",
     "@umijs/lint": "^4.0.0",
-    "@ursalink-cloud/core-sdk": "1.8.2-g",
+    "@ursalink-cloud/core-sdk": "^1.8.2-g",
     "antd": "^5.5.2",
     "dumi": "^2.2.0",
     "eslint": "^8.23.0",
@@ -108,13 +108,14 @@
     "styled-components": "^3.3.3",
     "stylelint": "^14.9.1"
   },
-  "dependencies": {
-    "immer": "^10.0.2",
-    "localforage": "^1.10.0",
-    "lodash": "^4.17.21",
-    "react-syntax-highlighter": "^15.5.0",
-    "ts-node": "^10.9.1",
-    "tsx": "^3.12.7",
-    "typescript": "^5.2.0-dev.20230530"
-  }
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "authors": [
+    "Kindred"
+  ]
 }

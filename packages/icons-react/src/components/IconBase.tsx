@@ -1,6 +1,15 @@
+import type {
+  AbstractNode,
+  IconDefinition,
+} from '@indredk/icons-svg/lib/types';
 import * as React from 'react';
-import { AbstractNode, IconDefinition } from '@ant-design/icons-svg/lib/types';
-import { generate, getSecondaryColor, isIconDefinition, warning, useInsertStyles } from '../utils';
+import {
+  generate,
+  getSecondaryColor,
+  isIconDefinition,
+  useInsertStyles,
+  warning,
+} from '../utils';
 
 export interface IconProps {
   icon: IconDefinition;
@@ -27,9 +36,13 @@ const twoToneColorPalette: TwoToneColorPalette = {
   calculated: false,
 };
 
-function setTwoToneColors({ primaryColor, secondaryColor }: TwoToneColorPaletteSetter) {
+function setTwoToneColors({
+  primaryColor,
+  secondaryColor,
+}: TwoToneColorPaletteSetter) {
   twoToneColorPalette.primaryColor = primaryColor;
-  twoToneColorPalette.secondaryColor = secondaryColor || getSecondaryColor(primaryColor);
+  twoToneColorPalette.secondaryColor =
+    secondaryColor || getSecondaryColor(primaryColor);
   twoToneColorPalette.calculated = !!secondaryColor;
 }
 
@@ -45,7 +58,15 @@ interface IconBaseComponent<P> extends React.FC<P> {
 }
 
 const IconBase: IconBaseComponent<IconProps> = (props) => {
-  const { icon, className, onClick, style, primaryColor, secondaryColor, ...restProps } = props;
+  const {
+    icon,
+    className,
+    onClick,
+    style,
+    primaryColor,
+    secondaryColor,
+    ...restProps
+  } = props;
 
   const svgRef = React.useRef<HTMLElement>();
 
@@ -59,7 +80,10 @@ const IconBase: IconBaseComponent<IconProps> = (props) => {
 
   useInsertStyles(svgRef);
 
-  warning(isIconDefinition(icon), `icon should be icon definiton, but got ${icon}`);
+  warning(
+    isIconDefinition(icon),
+    `icon should be icon definiton, but got ${icon}`,
+  );
 
   if (!isIconDefinition(icon)) {
     return null;

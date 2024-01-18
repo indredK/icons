@@ -1,101 +1,33 @@
-import { series, parallel } from 'gulp';
+import { readFileSync } from 'fs';
+import { parallel, series } from 'gulp';
+import { resolve } from 'path';
+import { SvgType } from '../../xzUtils/constant';
+import {
+  adjustViewBox,
+  assignAttrsAtTag,
+  setDefaultColorAtPathTag
+} from './plugins/svg2Definition/transforms';
+import { remainFillConfig } from './plugins/svgo/presets';
 import {
   clean,
   copy,
-  generateIcons,
   generateEntry,
+  generateIcons,
   generateInline
 } from './tasks/creators';
-import { generalConfig, remainFillConfig } from './plugins/svgo/presets';
-import {
-  assignAttrsAtTag,
-  adjustViewBox,
-  setDefaultColorAtPathTag
-} from './plugins/svg2Definition/transforms';
-import { twotoneStringify } from './plugins/svg2Definition/stringify';
-import { readFileSync } from 'fs';
-import { resolve } from 'path';
-import { getIdentifier, getIdentifierXzSvg, getIdentifierXzSvgSys } from './utils';
-import { IconDefinition } from './templates/types';
 import { ExtractRegExp } from './tasks/creators/generateInline';
-
+import { IconDefinition } from './templates/types';
+import { getIdentifierXzSvg, getIdentifierXzSvgSys } from './utils';
 const iconTemplate = readFileSync(
   resolve(__dirname, './templates/icon.ts.ejs'),
   'utf8'
 );
 
-
-/** 原来antd的实现 */
-const antdGenerate = [
-
-  // 2.2 generate abstract node with the theme "filled"
-  generateIcons({
-    theme: 'filled',
-    from: ['svg/filled/*.svg'],
-    toDir: 'src/asn',
-    svgoConfig: generalConfig,
-    extraNodeTransformFactories: [
-      assignAttrsAtTag('svg', { focusable: 'false' }),
-      adjustViewBox
-    ],
-    stringify: JSON.stringify,
-    template: iconTemplate,
-    mapToInterpolate: ({ name, content }) => ({
-      identifier: getIdentifier({ name, themeSuffix: 'Filled' }),
-      content
-    }),
-    filename: ({ name }) => getIdentifier({ name, themeSuffix: 'Filled' })
-  }),
-
-  // 2.2 generate abstract node with the theme "outlined"
-  generateIcons({
-    theme: 'outlined',
-    from: ['svg/outlined/*.svg'],
-    toDir: 'src/asn',
-    svgoConfig: generalConfig,
-    extraNodeTransformFactories: [
-      assignAttrsAtTag('svg', { focusable: 'false' }),
-      adjustViewBox
-    ],
-    stringify: JSON.stringify,
-    template: iconTemplate,
-    mapToInterpolate: ({ name, content }) => ({
-      identifier: getIdentifier({ name, themeSuffix: 'Outlined' }),
-      content
-    }),
-    filename: ({ name }) => getIdentifier({ name, themeSuffix: 'Outlined' })
-  }),
-
-  // 2.3 generate abstract node with the theme "twotone"
-  generateIcons({
-    theme: 'twotone',
-    from: ['svg/twotone/*.svg'],
-    toDir: 'src/asn',
-    svgoConfig: remainFillConfig,
-    extraNodeTransformFactories: [
-      assignAttrsAtTag('svg', { focusable: 'false' }),
-      adjustViewBox,
-      setDefaultColorAtPathTag('#333')
-    ],
-    stringify: twotoneStringify,
-    template: iconTemplate,
-    mapToInterpolate: ({ name, content }) => ({
-      identifier: getIdentifier({ name, themeSuffix: 'TwoTone' }),
-      content
-    }),
-    filename: ({ name }) => getIdentifier({ name, themeSuffix: 'TwoTone' })
-  }),
-
-]
-
-
-
 /** xz图标的实现 */
 const xzGenerate = [
-
   generateIcons({
-    theme: 'filled',
-    from: ['xzSvg/*.svg'],
+    theme: SvgType.Device,
+    from: [`svg/${SvgType.Device}/*.svg`],
     toDir: 'src/asn',
     svgoConfig: remainFillConfig,
     extraNodeTransformFactories: [
@@ -106,43 +38,56 @@ const xzGenerate = [
     stringify: JSON.stringify,
     template: iconTemplate,
     mapToInterpolate: ({ name, content }) => ({
-      identifier: getIdentifierXzSvg({ name, }),
+      identifier: getIdentifierXzSvg({ name, themeSuffix: SvgType.Device }),
       content
     }),
-    filename: ({ name }) => getIdentifierXzSvg({ name, })
+    filename: ({ name }) =>
+      getIdentifierXzSvg({ name, themeSuffix: SvgType.Device })
   }),
 
   generateIcons({
-    theme: 'outlined',
-    from: ['xzSvg-sys/*.svg'],
+    theme: SvgType.Channel,
+    from: [`svg/${SvgType.Channel}/*.svg`],
     toDir: 'src/asn',
     svgoConfig: remainFillConfig,
     extraNodeTransformFactories: [
       assignAttrsAtTag('svg', { focusable: 'false' }),
       adjustViewBox,
       setDefaultColorAtPathTag('#333')
-
     ],
     stringify: JSON.stringify,
     template: iconTemplate,
     mapToInterpolate: ({ name, content }) => ({
-      identifier: getIdentifierXzSvgSys({ name, }),
+      identifier: getIdentifierXzSvgSys({ name, themeSuffix: SvgType.Channel }),
       content
     }),
-    filename: ({ name, }) => getIdentifierXzSvgSys({ name, themeSuffix: 'Sys' })
+    filename: ({ name }) =>
+      getIdentifierXzSvgSys({ name, themeSuffix: SvgType.Channel })
   }),
-
-
-
-
-
-
-]
-
+  generateIcons({
+    theme: SvgType.System,
+    from: [`svg/${SvgType.System}/*.svg`],
+    toDir: 'src/asn',
+    svgoConfig: remainFillConfig,
+    extraNodeTransformFactories: [
+      assignAttrsAtTag('svg', { focusable: 'false' }),
+      adjustViewBox,
+      setDefaultColorAtPathTag('#333')
+    ],
+    stringify: JSON.stringify,
+    template: iconTemplate,
+    mapToInterpolate: ({ name, content }) => ({
+      identifier: getIdentifierXzSvgSys({ name, themeSuffix: SvgType.System }),
+      content
+    }),
+    filename: ({ name }) =>
+      getIdentifierXzSvgSys({ name, themeSuffix: SvgType.System })
+  })
+];
 
 export default series(
   // 1. clean
-  clean(['src', 'inline-svg', 'es', 'lib']),
+  clean(['src', 'inline-svg', 'inline-namespaced-svg', 'es', 'lib']),
 
   parallel(
     // 2.1 copy helpers.ts, types.ts
@@ -151,9 +96,7 @@ export default series(
       toDir: 'src'
     }),
     // ...antdGenerate,
-    ...xzGenerate,
-
-
+    ...xzGenerate
   ),
   parallel(
     // 3.1 generate entry file: src/index.ts

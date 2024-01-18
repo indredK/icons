@@ -1,13 +1,26 @@
-import type { AbstractNode, IconDefinition } from '@ant-design/icons-svg/lib/types';
 import { generate as generateColor } from '@ant-design/colors';
-import React, { useContext, useEffect } from 'react';
-import warn from 'rc-util/lib/warning';
+import type {
+  AbstractNode,
+  IconDefinition,
+} from '@indredk/icons-svg/lib/types';
 import { updateCSS } from 'rc-util/lib/Dom/dynamicCSS';
 import { getShadowRoot } from 'rc-util/lib/Dom/shadow';
+import warn from 'rc-util/lib/warning';
+import type {
+  CSSProperties,
+  MouseEventHandler,
+  MutableRefObject,
+  ReactNode,
+} from 'react';
+import React, { useContext, useEffect } from 'react';
 import IconContext from './components/Context';
 
+function camelCase(input: string) {
+  return input.replace(/-(.)/g, (match, g) => g.toUpperCase());
+}
+
 export function warning(valid: boolean, message: string) {
-  warn(valid, `[@ant-design/icons] ${message}`);
+  warn(valid, `[@indredk/icons] ${message}`);
 }
 
 export function isIconDefinition(target: any): target is IconDefinition {
@@ -28,26 +41,39 @@ export function normalizeAttrs(attrs: Attrs = {}): Attrs {
         delete acc.class;
         break;
       default:
-        acc[key] = val;
+        delete acc[key];
+        acc[camelCase(key)] = val;
     }
     return acc;
   }, {});
 }
 
-export interface Attrs {
-  [key: string]: string;
+export type Attrs = Record<string, string>;
+interface RootProps {
+  onClick: MouseEventHandler<Element>;
+  style: CSSProperties;
+  ref: MutableRefObject<any>;
+  [props: string]:
+    | string
+    | number
+    | ReactNode
+    | MouseEventHandler<Element>
+    | CSSProperties
+    | MutableRefObject<any>;
 }
 
 export function generate(
   node: AbstractNode,
   key: string,
-  rootProps?: { [key: string]: any } | false,
+  rootProps?: RootProps | false,
 ): any {
   if (!rootProps) {
     return React.createElement(
       node.tag,
       { key, ...normalizeAttrs(node.attrs) },
-      (node.children || []).map((child, index) => generate(child, `${key}-${node.tag}-${index}`)),
+      (node.children || []).map((child, index) =>
+        generate(child, `${key}-${node.tag}-${index}`),
+      ),
     );
   }
 
@@ -58,7 +84,9 @@ export function generate(
       ...normalizeAttrs(node.attrs),
       ...rootProps,
     },
-    (node.children || []).map((child, index) => generate(child, `${key}-${node.tag}-${index}`)),
+    (node.children || []).map((child, index) =>
+      generate(child, `${key}-${node.tag}-${index}`),
+    ),
   );
 }
 
@@ -155,7 +183,7 @@ export const useInsertStyles = (eleRef: React.RefObject<HTMLElement>) => {
     const ele = eleRef.current;
     const shadowRoot = getShadowRoot(ele);
 
-    updateCSS(mergedStyleStr, '@ant-design-icons', {
+    updateCSS(mergedStyleStr, '@indredk-icons', {
       prepend: true,
       csp,
       attachTo: shadowRoot,

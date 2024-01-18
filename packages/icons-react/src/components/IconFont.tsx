@@ -1,26 +1,31 @@
 import * as React from 'react';
-import Icon, { IconBaseProps } from './Icon';
+import type { IconBaseProps } from './Icon';
+import Icon from './Icon';
 
 const customCache = new Set<string>();
 
 export interface CustomIconOptions {
   scriptUrl?: string | string[];
-  extraCommonProps?: { [key: string]: any };
+  extraCommonProps?: Record<string, unknown>;
 }
 
-export interface IconFontProps<T extends string = string> extends IconBaseProps {
+export interface IconFontProps<T extends string = string>
+  extends IconBaseProps {
   type: T;
 }
 
 function isValidCustomScriptUrl(scriptUrl: string): boolean {
   return Boolean(
-    typeof scriptUrl === 'string'
-      && scriptUrl.length
-      && !customCache.has(scriptUrl)
+    typeof scriptUrl === 'string' &&
+      scriptUrl.length &&
+      !customCache.has(scriptUrl),
   );
 }
 
-function createScriptUrlElements(scriptUrls: string[], index: number = 0): void {
+function createScriptUrlElements(
+  scriptUrls: string[],
+  index: number = 0,
+): void {
   const currentScriptUrl = scriptUrls[index];
   if (isValidCustomScriptUrl(currentScriptUrl)) {
     const script = document.createElement('script');
@@ -40,7 +45,7 @@ function createScriptUrlElements(scriptUrls: string[], index: number = 0): void 
 }
 
 export default function create<T extends string = string>(
-  options: CustomIconOptions = {}
+  options: CustomIconOptions = {},
 ): React.FC<IconFontProps<T>> {
   const { scriptUrl, extraCommonProps = {} } = options;
 
@@ -64,23 +69,25 @@ export default function create<T extends string = string>(
     }
   }
 
-  const Iconfont = React.forwardRef<HTMLSpanElement, IconFontProps<T>>((props, ref) => {
-    const { type, children, ...restProps } = props;
+  const Iconfont = React.forwardRef<HTMLSpanElement, IconFontProps<T>>(
+    (props, ref) => {
+      const { type, children, ...restProps } = props;
 
-    // children > type
-    let content: React.ReactNode = null;
-    if (props.type) {
-      content = <use xlinkHref={`#${type}`} />;
-    }
-    if (children) {
-      content = children;
-    }
-    return (
-      <Icon {...extraCommonProps} {...restProps} ref={ref}>
-        {content}
-      </Icon>
-    );
-  });
+      // children > type
+      let content: React.ReactNode = null;
+      if (props.type) {
+        content = <use xlinkHref={`#${type}`} />;
+      }
+      if (children) {
+        content = children;
+      }
+      return (
+        <Icon {...extraCommonProps} {...restProps} ref={ref}>
+          {content}
+        </Icon>
+      );
+    },
+  );
 
   Iconfont.displayName = 'Iconfont';
 

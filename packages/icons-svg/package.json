@@ -1,11 +1,15 @@
 {
   "name": "@indredk/icons-svg",
-  "version": "1.0.1",
-  "sideEffects": false,
+  "version": "1.0.3",
   "description": "Abstract nodes for ant design icons.",
-  "contributors": [],
   "homepage": "https://gitee.com/inderK",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitee.com/inderK"
+  },
   "license": "MIT",
+  "contributors": [],
+  "sideEffects": false,
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
@@ -14,22 +18,18 @@
     "inline-svg",
     "inline-namespaced-svg"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://gitee.com/inderK"
-  },
   "scripts": {
-    "g": "npm run generate",
-    "generate": "cross-env NODE_ENV=production gulp --require ts-node/register/transpile-only",
-    "type-check": "tsc --noEmit",
+    "build": "cross-env NODE_ENV=production && npm run build:es && npm run build:lib",
     "build:es": "tsc --project tsconfig.build.json --module esnext --outDir es",
     "build:lib": "tsc --project tsconfig.build.json --module commonjs --outDir lib",
-    "build": "cross-env NODE_ENV=production && npm run build:es && npm run build:lib",
-    "test": "cross-env NODE_ENV=test && npm run test:unit",
-    "test:unit": "jest",
+    "digest": "tsx scripts/digest",
+    "g": "npm run generate",
+    "generate": "cross-env NODE_ENV=production gulp --require ts-node/register/transpile-only",
     "prepublishOnly": " npm run g && npm run build &&  npm run digest",
     "prepublishOnly-": "npm run test && npm run g && npm run build && npm run type-check && npm run digest",
-    "digest": "node scripts/digest.js"
+    "test": "cross-env NODE_ENV=test && npm run test:unit",
+    "test:unit": "jest",
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import {
   Button,
   Card,
@@ -118,7 +119,7 @@ const Demo = () => {
               optionFilterProp="children"
               onChange={DonChange}
               filterOption={(input, option) =>
-                (option?.label ?? '')
+                ((option?.label as string) ?? '')
                   .toLowerCase()
                   .includes(input.toLowerCase())
               }
@@ -133,7 +134,7 @@ const Demo = () => {
               optionFilterProp="children"
               onChange={ConChange}
               filterOption={(input, option) =>
-                (option?.label ?? '')
+                ((option?.label as string) ?? '')
                   .toLowerCase()
                   .includes(input.toLowerCase())
               }

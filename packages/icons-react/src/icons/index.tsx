@@ -1,14 +1,15 @@
 // GENERATE BY ./scripts/generate.ts
 // DON NOT EDIT IT MANUALLY
 
-export { default as AM319HCHOIR } from './AM319HCHOIR';
-export { default as AM319HCHOIRTemperature } from './AM319HCHOIRTemperature';
-export { default as Em300SldN00Cn } from './Em300SldN00Cn';
-export { default as Em300SldN00CnLtnOnline } from './Em300SldN00CnLtnOnline';
-export { default as Em300SldN00CnPir } from './Em300SldN00CnPir';
-export { default as Em300SldN00CnTemperature } from './Em300SldN00CnTemperature';
-export { default as Sysgithub } from './Sysgithub';
-export { default as SysmoonRegular } from './SysmoonRegular';
-export { default as SyssunRegular } from './SyssunRegular';
-export { default as Uc3X14 } from './Uc3X14';
-export { default as Uc3X22 } from './Uc3X22';
+export { default as AM319HCHOIRDevice } from './AM319HCHOIRDevice';
+export { default as AM319HCHOIRTemperatureDevice } from './AM319HCHOIRTemperatureDevice';
+export { default as Channelgithub } from './Channelgithub';
+export { default as ChannelmoonRegular } from './ChannelmoonRegular';
+export { default as ChannelsunRegular } from './ChannelsunRegular';
+export { default as Em300SldN00CnDevice } from './Em300SldN00CnDevice';
+export { default as Em300SldN00CnLtnOnlineDevice } from './Em300SldN00CnLtnOnlineDevice';
+export { default as Em300SldN00CnPirDevice } from './Em300SldN00CnPirDevice';
+export { default as Systemgithub } from './Systemgithub';
+export { default as SystemmoonRegular } from './SystemmoonRegular';
+export { default as SystemsunRegular } from './SystemsunRegular';
+export { default as UC3X14Device } from './UC3X14Device';
