@@ -3,23 +3,23 @@ const fs = require('fs-extra');
 const prettier = require('prettier');
 const WebpackIconfontPluginNodejs = require('webpack-iconfont-plugin-nodejs');
 
-const fonts = ['Device', 'Channel', 'System'];
+const svgPath = {
+  xz: 'xzSvg',
+  xzSys: 'xzSvg-sys',
+};
 
+// const fonts = ["fill", "outline"];
+const fonts = Object.keys(svgPath);
 const upperName = (name) => name.charAt(0).toUpperCase() + name.slice(1);
 
 fs.ensureDirSync('fonts');
 fs.ensureDirSync('iconfont');
 
 fonts.forEach((name) => {
-  const fontName = `ant${name}`;
+  const fontName = `${name}`;
   const uppercaseName = upperName(name);
 
-  const svgFolder = path.resolve(
-    process.cwd(),
-    '../icons-svg/svg/',
-    // compatible old one
-    name,
-  );
+  const svgFolder = path.resolve(process.cwd(), '../icons-svg/', svgPath[name]);
   const dist = `iconfont/${name}`;
 
   var options = {
@@ -62,7 +62,7 @@ export default class Icon${uppercaseName} extends React.PureComponent<Icon${uppe
       ...props
     } = this.props;
     const styleOverrides: TextStyle = {
-      fontFamily: "ant${name}",
+      fontFamily: "${name}",
       fontWeight: "normal",
       fontStyle: "normal",
       fontSize: size,
