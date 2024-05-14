@@ -31,6 +31,12 @@ async function createScriptUrlElements(
   // 创建文件夹以保存 SVG 文件
   const dirName = `./packages/icons-svg/svg/${type}`;
 
+  console.log(
+    '%c AT-[ res ]-36-「IconTransf」',
+    'font-size:13px; background:pink; color:#bf2c9f;',
+    `${new Date()},`,
+    dirName,
+  );
   for await (let [index, svg] of svglist.entries()) {
     const res = getId(svg) + '.svg';
     if (!fs.existsSync(dirName)) {

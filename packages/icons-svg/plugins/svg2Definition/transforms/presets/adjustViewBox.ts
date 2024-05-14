@@ -1,6 +1,5 @@
 import { assignAttrsAtTag } from '..';
 import { TransformFactory } from '../..';
-import { includes } from 'ramda';
 
 // version < antd@3.9
 const OLD_ICON_NAMES = [
@@ -31,6 +30,7 @@ const OLD_ICON_NAMES = [
 export const adjustViewBox: TransformFactory = assignAttrsAtTag(
   'svg',
   ({ name }) => ({
-    viewBox: includes(name, OLD_ICON_NAMES) ? '0 0 1024 1024' : '64 64 896 896'
+    // viewBox: includes(name, OLD_ICON_NAMES) ? '0 0 1024 1024' : '64 64 896 896'
+    viewBox: '0 0 1024 1024'
   })
 );

@@ -14,6 +14,7 @@ import { getTwoToneColor, setTwoToneColor } from './twoTonePrimaryColor';
 
 export interface AntdIconProps extends IconBaseProps {
   twoToneColor?: TwoToneColor;
+  pathFill?: string;
 }
 
 export interface IconComponentProps extends AntdIconProps {
@@ -33,72 +34,75 @@ interface IconBaseComponent<Props>
   setTwoToneColor: typeof setTwoToneColor;
 }
 
-const Icon = React.forwardRef<HTMLSpanElement, IconComponentProps>(
-  (props, ref) => {
-    const {
-      // affect outter <i>...</i>
-      className,
+const Icon = React.forwardRef<
+  HTMLSpanElement,
+  IconComponentProps & { pathFill: string }
+>((props, ref) => {
+  const {
+    // affect outter <i>...</i>
+    className,
 
-      // affect inner <svg>...</svg>
-      icon,
-      spin,
-      rotate,
+    // affect inner <svg>...</svg>
+    icon,
+    spin,
+    rotate,
 
-      tabIndex,
-      onClick,
+    tabIndex,
+    onClick,
 
-      // other
-      twoToneColor,
+    pathFill,
+    // other
+    twoToneColor,
 
-      ...restProps
-    } = props;
+    ...restProps
+  } = props;
 
-    const { prefixCls = 'anticon', rootClassName } = React.useContext(Context);
+  const { prefixCls = 'anticon', rootClassName } = React.useContext(Context);
 
-    const classString = classNames(
-      rootClassName,
-      prefixCls,
-      {
-        [`${prefixCls}-${icon.name}`]: !!icon.name,
-        [`${prefixCls}-spin`]: !!spin || icon.name === 'loading',
-      },
-      className,
-    );
+  const classString = classNames(
+    rootClassName,
+    prefixCls,
+    {
+      [`${prefixCls}-${icon.name}`]: !!icon.name,
+      [`${prefixCls}-spin`]: !!spin || icon.name === 'loading',
+    },
+    className,
+  );
 
-    let iconTabIndex = tabIndex;
-    if (iconTabIndex === undefined && onClick) {
-      iconTabIndex = -1;
-    }
+  let iconTabIndex = tabIndex;
+  if (iconTabIndex === undefined && onClick) {
+    iconTabIndex = -1;
+  }
 
-    const svgStyle = rotate
-      ? {
-          msTransform: `rotate(${rotate}deg)`,
-          transform: `rotate(${rotate}deg)`,
-        }
-      : undefined;
+  const svgStyle = rotate
+    ? {
+        msTransform: `rotate(${rotate}deg)`,
+        transform: `rotate(${rotate}deg)`,
+      }
+    : undefined;
 
-    const [primaryColor, secondaryColor] = normalizeTwoToneColors(twoToneColor);
+  const [primaryColor, secondaryColor] = normalizeTwoToneColors(twoToneColor);
 
-    return (
-      <span
-        role="img"
-        aria-label={icon.name}
-        {...restProps}
-        ref={ref}
-        tabIndex={iconTabIndex}
-        onClick={onClick}
-        className={classString}
-      >
-        <ReactIcon
-          icon={icon}
-          primaryColor={primaryColor}
-          secondaryColor={secondaryColor}
-          style={svgStyle}
-        />
-      </span>
-    );
-  },
-) as IconBaseComponent<IconComponentProps>;
+  return (
+    <span
+      role="img"
+      aria-label={icon.name}
+      {...restProps}
+      ref={ref}
+      tabIndex={iconTabIndex}
+      onClick={onClick}
+      className={classString}
+    >
+      <ReactIcon
+        icon={icon}
+        primaryColor={primaryColor}
+        secondaryColor={secondaryColor}
+        style={svgStyle}
+        pathFill={pathFill}
+      />
+    </span>
+  );
+}) as IconBaseComponent<IconComponentProps>;
 
 Icon.displayName = 'AntdIcon';
 Icon.getTwoToneColor = getTwoToneColor;

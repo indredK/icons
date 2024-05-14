@@ -42,7 +42,7 @@ const xzGenerate = [
       content
     }),
     filename: ({ name }) =>
-      getIdentifierXzSvg({ name, themeSuffix: SvgType.Device })
+      getIdentifierXzSvgSys({ name, themeSuffix: SvgType.Device })
   }),
 
   generateIcons({

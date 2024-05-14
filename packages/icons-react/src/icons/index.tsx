@@ -1,15 +1,11 @@
 // GENERATE BY ./scripts/generate.ts
 // DON NOT EDIT IT MANUALLY
 
-export { default as AM319HCHOIRDevice } from './AM319HCHOIRDevice';
-export { default as AM319HCHOIRTemperatureDevice } from './AM319HCHOIRTemperatureDevice';
-export { default as Channelgithub } from './Channelgithub';
-export { default as ChannelmoonRegular } from './ChannelmoonRegular';
-export { default as ChannelsunRegular } from './ChannelsunRegular';
-export { default as Em300SldN00CnDevice } from './Em300SldN00CnDevice';
-export { default as Em300SldN00CnLtnOnlineDevice } from './Em300SldN00CnLtnOnlineDevice';
-export { default as Em300SldN00CnPirDevice } from './Em300SldN00CnPirDevice';
-export { default as Systemgithub } from './Systemgithub';
-export { default as SystemmoonRegular } from './SystemmoonRegular';
-export { default as SystemsunRegular } from './SystemsunRegular';
-export { default as UC3X14Device } from './UC3X14Device';
+export { default as ChannelIconDianliuzhengchang1 } from './ChannelIconDianliuzhengchang1';
+export { default as ChannelXzBattery } from './ChannelXzBattery';
+export { default as ChannelXzCold } from './ChannelXzCold';
+export { default as ChannelXzPar } from './ChannelXzPar';
+export { default as DeviceIconDianliuzhengchang1 } from './DeviceIconDianliuzhengchang1';
+export { default as DeviceXzShape } from './DeviceXzShape';
+export { default as SystemIconDianliuzhengchang1 } from './SystemIconDianliuzhengchang1';
+export { default as SystemXzZaixian } from './SystemXzZaixian';

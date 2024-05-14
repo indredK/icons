@@ -19,6 +19,7 @@ export interface IconProps {
   primaryColor?: string; // only for two-tone
   secondaryColor?: string; // only for two-tone
   focusable?: string;
+  pathFill?: string;
 }
 
 export interface TwoToneColorPaletteSetter {
@@ -65,6 +66,7 @@ const IconBase: IconBaseComponent<IconProps> = (props) => {
     style,
     primaryColor,
     secondaryColor,
+    pathFill,
     ...restProps
   } = props;
 
@@ -101,9 +103,11 @@ const IconBase: IconBaseComponent<IconProps> = (props) => {
     onClick,
     style,
     'data-icon': target.name,
-    width: '1em',
-    height: '1em',
+    width: '100%',
+    height: '100%',
     fill: 'currentColor',
+    // 路径颜色
+    pathFill: pathFill,
     'aria-hidden': 'true',
     ...restProps,
     ref: svgRef,

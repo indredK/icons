@@ -1,39 +1,35 @@
 {
   "name": "@indredk/icons-react-native",
-  "version": "1.0.1",
+  "version": "1.1.6",
+  "repository": "https://gitee.com/inderK",
+  "license": "MIT",
+  "contributors": [],
+  "sideEffects": false,
   "main": "./lib/index.js",
   "module": "./es/index.js",
-  "sideEffects": false,
-  "repository": "https://gitee.com/inderK",
-  "contributors": [],
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org"
-  },
-  "scripts": {
-    "lint": "eslint src/ --ext .tsx,.ts,.jsx,.js",
-    "prelint": "npm run generate",
-    "compile": "father build",
-    "#test": "暂不进行测试",
-    "test": "jest",
-    "generate": "node scripts/index.js",
-    "pregenerate": "npm run clean",
-    "clean": "rimraf -rf fonts iconfont src/*.tsx",
-    "prepublishOnly": " npm run generate && npm run compile",
-    "preclean": "npm run patch-package",
-    "patch-package": "patch-package",
-    "ci": " npm run generate && npm run compile",
-    "ci-": "npm run lint && npm run test && npm run compile"
-  },
   "files": [
     "es",
     "lib",
     "fonts",
     "react-native.config.js"
   ],
-  "peerDependencies": {
-    "react": ">=16.0.0"
+  "scripts": {
+    "#test": "暂不进行测试",
+    "ci": " npm run generate && npm run compile",
+    "ci-": "npm run lint && npm run test && npm run compile",
+    "preclean": "npm run patch-package",
+    "clean": "rimraf -rf fonts iconfont src/*.tsx",
+    "compile": "father build",
+    "pregenerate": "npm run clean",
+    "generate": "node scripts/index.js",
+    "prelint": "npm run generate",
+    "lint": "eslint src/ --ext .tsx,.ts,.jsx,.js",
+    "patch-package": "patch-package",
+    "prepublishOnly": " npm run generate && npm run compile",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@ant-design/icons-react-native": "^2.3.2"
   },
   "devDependencies": {
     "@rc-component/father-plugin": "^1.0.1",
@@ -57,7 +53,11 @@
     "typescript": "^4.0.0",
     "webpack-iconfont-plugin-nodejs": "1.0.17"
   },
-  "dependencies": {
-    "@ant-design/icons-react-native": "^2.3.2"
+  "peerDependencies": {
+    "react": ">=16.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

@@ -53,6 +53,7 @@ interface RootProps {
   onClick: MouseEventHandler<Element>;
   style: CSSProperties;
   ref: MutableRefObject<any>;
+  pathFill: string;
   [props: string]:
     | string
     | number
@@ -66,13 +67,28 @@ export function generate(
   node: AbstractNode,
   key: string,
   rootProps?: RootProps | false,
+  childrenProps?: { pathFill: string },
 ): any {
-  if (!rootProps) {
+  if (rootProps === false) {
+    console.log(
+      '%c AT-[ rootProps ]-70-「utils」',
+      'font-size:13px; background:pink; color:#bf2c9f;',
+      `${new Date()},`,
+      { ...normalizeAttrs(node.attrs) },
+    );
+    console.log(
+      '%c AT-[ node.attrs ]-74-「utils」',
+      'font-size:13px; background:pink; color:#bf2c9f;',
+      `${new Date()},`,
+      node.attrs,
+    );
     return React.createElement(
       node.tag,
-      { key, ...normalizeAttrs(node.attrs) },
+      { key, ...normalizeAttrs(node.attrs), fill: childrenProps.pathFill },
       (node.children || []).map((child, index) =>
-        generate(child, `${key}-${node.tag}-${index}`),
+        generate(child, `${key}-${node.tag}-${index}`, false, {
+          pathFill: childrenProps?.pathFill,
+        }),
       ),
     );
   }
@@ -85,7 +101,9 @@ export function generate(
       ...rootProps,
     },
     (node.children || []).map((child, index) =>
-      generate(child, `${key}-${node.tag}-${index}`),
+      generate(child, `${key}-${node.tag}-${index}`, false, {
+        pathFill: rootProps?.pathFill,
+      }),
     ),
   );
 }
@@ -108,8 +126,8 @@ export function normalizeTwoToneColors(
 // These props make sure that the SVG behaviours like general text.
 // Reference: https://blog.prototypr.io/align-svg-icons-to-text-and-say-goodbye-to-font-icons-d44b3d7b26b4
 export const svgBaseProps = {
-  width: '1em',
-  height: '1em',
+  width: '100%',
+  height: '100%',
   fill: 'currentColor',
   'aria-hidden': 'true',
   focusable: 'false',
