@@ -1,6 +1,6 @@
 {
   "name": "@indredk/icons-svg",
-  "version": "1.1.6",
+  "version": "1.1.12",
   "description": "Abstract nodes for ant design icons.",
   "homepage": "https://gitee.com/inderK",
   "repository": {
@@ -22,6 +22,7 @@
     "build": "cross-env NODE_ENV=production && npm run build:es && npm run build:lib",
     "build:es": "tsc --project tsconfig.build.json --module esnext --outDir es",
     "build:lib": "tsc --project tsconfig.build.json --module commonjs --outDir lib",
+    "clean": "rimraf -rf es inline-namespaced-svg src inline-svg lib svg",
     "digest": "tsx scripts/digest",
     "g": "npm run generate",
     "generate": "cross-env NODE_ENV=production gulp --require ts-node/register/transpile-only",

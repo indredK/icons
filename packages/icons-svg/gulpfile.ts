@@ -26,6 +26,7 @@ const iconTemplate = readFileSync(
 /** xz图标的实现 */
 const xzGenerate = [
   generateIcons({
+    optimizePath: false,
     theme: SvgType.Device,
     from: [`svg/${SvgType.Device}/*.svg`],
     toDir: 'src/asn',
@@ -98,6 +99,7 @@ export default series(
     // ...antdGenerate,
     ...xzGenerate
   ),
+
   parallel(
     // 3.1 generate entry file: src/index.ts
     generateEntry({

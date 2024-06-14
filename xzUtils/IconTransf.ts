@@ -59,6 +59,10 @@ const changeNpmVersion = (obj: { [key: string]: string }): void => {
     );
     const json = require(packageJsonPath);
     json.version = obj[key];
+    if (json?.dependencies?.['@indredk/icons-svg']) {
+      json.dependencies['@indredk/icons-svg'] = obj[key];
+    }
+
     fs.writeFileSync(packageJsonPath, JSON.stringify(json, null, 2));
   });
 };

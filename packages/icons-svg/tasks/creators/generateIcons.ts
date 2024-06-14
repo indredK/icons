@@ -1,9 +1,9 @@
-import { src, dest } from 'gulp';
-import SVGO from 'svgo';
-import { SVG2DefinitionOptions } from '../../plugins/svg2Definition';
+import { dest, src } from 'gulp';
 import rename from 'gulp-rename';
+import SVGO from 'svgo';
+import { svg2Definition, svgo, useTemplate } from '../../plugins';
+import { SVG2DefinitionOptions } from '../../plugins/svg2Definition';
 import { UseTemplatePluginOptions } from '../../plugins/useTemplate';
-import { useTemplate, svg2Definition, svgo } from '../../plugins';
 
 export interface GenerateIconsOptions
   extends SVG2DefinitionOptions,
@@ -12,6 +12,7 @@ export interface GenerateIconsOptions
   toDir: string;
   svgoConfig: SVGO.Options;
   filename: (option: { name: string }) => string;
+  optimizePath?: boolean;
 }
 
 export const generateIcons = ({
@@ -23,11 +24,12 @@ export const generateIcons = ({
   stringify,
   template,
   mapToInterpolate,
-  filename
+  filename,
+  optimizePath = true
 }: GenerateIconsOptions) =>
   function GenerateIcons() {
     return src(from)
-      .pipe(svgo(svgoConfig))
+      .pipe(svgo(svgoConfig, optimizePath))
       .pipe(
         svg2Definition({
           theme,

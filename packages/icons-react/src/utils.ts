@@ -70,18 +70,6 @@ export function generate(
   childrenProps?: { pathFill: string },
 ): any {
   if (rootProps === false) {
-    console.log(
-      '%c AT-[ rootProps ]-70-「utils」',
-      'font-size:13px; background:pink; color:#bf2c9f;',
-      `${new Date()},`,
-      { ...normalizeAttrs(node.attrs) },
-    );
-    console.log(
-      '%c AT-[ node.attrs ]-74-「utils」',
-      'font-size:13px; background:pink; color:#bf2c9f;',
-      `${new Date()},`,
-      node.attrs,
-    );
     return React.createElement(
       node.tag,
       { key, ...normalizeAttrs(node.attrs), fill: childrenProps.pathFill },
